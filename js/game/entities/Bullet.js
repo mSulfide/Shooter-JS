@@ -5,6 +5,6 @@ class Bullet extends GameObject {
     }
 
     update({ deltaTime }) {
-        this.position = vMath.add(this.position, vMath.prod(this.forward(), deltaTime * this.speed));
+        this.translate(vMath.prod(this.forward(), deltaTime * this.speed));
     }
 }

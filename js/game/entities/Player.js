@@ -39,7 +39,7 @@ class Player extends GameObject {
 
     update({ deltaTime }) {
         this.angle += this.angVel * deltaTime;
-        this.position = vMath.add(this.position, vMath.prod(this.forward(), deltaTime * this.move));
+        this.translate(vMath.prod(this.forward(), deltaTime * this.move));
         this.weapon.position = this.position
     }
 }

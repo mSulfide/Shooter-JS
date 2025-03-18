@@ -7,6 +7,10 @@ class GameObject {
         this.layer = layer || 0;
     }
 
+    translate(offset) {
+        this.position = vMath.add(this.position, offset);
+    }
+
     forward() {
         return vMath.forward(this.angle);
     }
