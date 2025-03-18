@@ -5,7 +5,7 @@ class Player extends GameObject {
         this.angVel = 0;
     }
 
-    start({ keyboard, scene }) {
+    start({ keyboard, mouse, scene }) {
         let forward = false, back = false;
         const moveForward = isActive => {
             forward = isActive;
@@ -32,14 +32,23 @@ class Player extends GameObject {
         ];
         keyboard.bind(...bindings);
 
+        this.isFire = false;
+        mouse.addListener('mousedown', () => this.isFire = true);
+        mouse.addListener('mouseup', () => this.isFire = false);
+        mouse.addListener('mouseleave', () => this.isFire = false);
+
         const weapon = new Weapon({ name: 'aboba', model: MODELS.weapon, layer: this.layer + 0.05 });
         scene.spawn(weapon);
         this.weapon = weapon;
     }
 
-    update({ deltaTime }) {
+    update({ deltaTime, camera }) {
         this.angle += this.angVel * deltaTime;
         this.translate(vMath.prod(this.forward(), deltaTime * this.move));
-        this.weapon.position = this.position
+
+        this.weapon.position = this.position;
+        this.weapon.lookAt(camera.mousePosition);
+        if (this.isFire)
+            this.weapon.tryFire();
     }
 }
