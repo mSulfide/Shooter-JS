@@ -1,6 +1,8 @@
 class Weapon extends GameObject {
     constructor(props) {
         super(props);
+        this.cooldown = props.cooldown || 0.2;
+        this.delay = 0;
     }
 
     fire() {
@@ -17,10 +19,19 @@ class Weapon extends GameObject {
     
     start({ mouse, scene }) {
         this.scene = scene;
-        mouse.addListener('mousedown', () => this.fire());
+        mouse.addListener('mousedown', () => this.isFire = true);
+        mouse.addListener('mouseup', () => this.isFire = false);
     }
 
-    update({ camera }) {
+    update({ camera, deltaTime }) {
         this.lookAt(camera.mousePosition);
+
+        if (this.delay > 0) {
+            this.delay -= deltaTime;
+        }
+        else if (this.isFire) {
+            this.delay = this.cooldown;
+            this.fire();
+        }
     }
 }

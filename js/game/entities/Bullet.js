@@ -1,4 +1,4 @@
-const DEATH_RADIUS = 2.5;
+const DEATH_RADIUS = 10;
 
 class Bullet extends GameObject {
     constructor(props) {
