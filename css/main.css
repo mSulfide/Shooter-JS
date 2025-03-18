@@ -1,0 +1,12 @@
+.mainScreen {
+    background-color: #bfb;
+    border: 4px solid #000000;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
