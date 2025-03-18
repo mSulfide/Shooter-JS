@@ -6,7 +6,7 @@ class GameObject {
         this.angle = angle || Math.PI / 2;
         this.layer = layer || 0;
     }
-
+    
     translate(offset) {
         this.position = vMath.add(this.position, offset);
     }
