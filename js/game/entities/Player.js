@@ -33,20 +33,16 @@ class Player extends GameObject {
         ];
         keyboard.bind(...bindings);
 
-        this.isFire = false;
-        mouse.addListener('mousedown', () => this.isFire = true);
-        mouse.addListener('mouseup', () => this.isFire = false);
-        mouse.addListener('mouseleave', () => this.isFire = false);
-
         const weapon = new Weapon({ name: 'playerGun', model: MODELS.weapon, layer: this.layer + 0.05 });
         scene.spawn(weapon);
         this.weapon = weapon;
+        mouse.addListener('mousedown', () => weapon.isFire = true);
+        mouse.addListener('mouseup', () => weapon.isFire = false);
+        mouse.addListener('mouseleave', () => weapon.isFire = false);
     }
 
     update({ camera }) {
         this.weapon.lookAt(camera.mousePosition);
-        if (this.isFire)
-            this.weapon.tryFire();
     }
 
     lateUpdate() {

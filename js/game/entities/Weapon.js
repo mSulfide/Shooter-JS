@@ -5,6 +5,7 @@ class Weapon extends GameObject {
         this.speed = props.speed || Math.PI * 4;
         this.delay = 0;
         this.aim = this.angle;
+        this.isFire = false;
     }
 
     lookAt(point) {
@@ -22,14 +23,6 @@ class Weapon extends GameObject {
             speed: 10
         });
         this.scene.spawn(bullet);
-    }
-
-    tryFire() {
-        if (this.delay <= 0) {
-            this.fire();
-            return true;
-        }
-        return false;
     }
     
     start({ scene }) {
@@ -49,6 +42,9 @@ class Weapon extends GameObject {
         
         if (this.delay > 0) {
             this.delay -= deltaTime;
+        }
+        else if (this.isFire) {
+            this.fire();
         }
     }
 }
