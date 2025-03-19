@@ -59,6 +59,20 @@ class VMath {
         return this.rotate({ x: 1, y: 0 }, angle);
     }
 
+    lerp(a, b, step) {
+        const delta = this.sub(a, b);
+        const offset = this.sqrModul(delta) > step * step ? this.prod(this.norm(delta), step) : delta;
+        return this.add(a, offset);
+    }
+
+    lerpAngle(a, b, step) {
+        const norm = angle => angle >= -Math.PI && angle < Math.PI ? angle : angle - Math.round(angle / Math.PI / 2) * Math.PI * 2;
+        
+        const delta = norm(b - a);
+        const dir = delta > 0 ? 1 : -1;
+        return norm(a + dir * Math.min(Math.abs(delta), step));
+    }
+
     zero() {
         return { x: 0, y: 0 };
     }

@@ -30,15 +30,7 @@ class Weapon extends GameObject {
     }
 
     update({ deltaTime }) {
-        const eps = 0.001;
-        const norm = angle => angle >= -Math.PI && angle < Math.PI ? angle : angle - Math.round(angle / Math.PI / 2) * Math.PI * 2;
-        this.angle = norm(this.angle);
-        
-        const delta = norm(this.aim - this.angle);
-        if (Math.abs(delta) > eps) {
-            const dir = delta > 0 ? 1 : -1;
-            this.angle += dir * Math.min(Math.abs(delta), this.speed * deltaTime);
-        }
+        this.angle = vMath.lerpAngle(this.angle, this.aim, this.speed * deltaTime);
         
         if (this.delay > 0) {
             this.delay -= deltaTime;
