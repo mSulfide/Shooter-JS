@@ -3,7 +3,7 @@ class GameObject {
         this.name = name || 'new GameObject';
         this.position = position || vMath.zero();
         this.model = model || [];
-        this.angle = angle || Math.PI / 2;
+        this.angle = angle || 0;
         this.layer = layer || 0;
     }
     
