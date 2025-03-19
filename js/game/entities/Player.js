@@ -1,28 +1,29 @@
 class Player extends GameObject {
     constructor(props) {
         super(props);
-        this.move = 0;
-        this.angVel = 0;
     }
 
     start({ keyboard, mouse, scene }) {
+        const ship = new Ship({ name: 'playerShip', model: MODELS.testShip, layer: this.layer});
+        scene.spawn(ship);
+        this.ship = ship;
         let forward = false, back = false;
         const moveForward = isActive => {
             forward = isActive;
-            this.move = forward - back;
+            ship.thrust = forward - back;
         };
         const moveBack = isActive => {
             back = isActive;
-            this.move = forward - back;
+            ship.thrust = forward - back;
         };
         let right = false, left = false;
         const rotateRight = isActive => {
             right = isActive;
-            this.angVel = left - right;
+            ship.rotation = left - right;
         };
         const rotateLeft = isActive => {
             left = isActive;
-            this.angVel = left - right;
+            ship.rotation = left - right;
         };
         const bindings = [
             { key: 'KeyW', method: moveForward },
@@ -37,18 +38,19 @@ class Player extends GameObject {
         mouse.addListener('mouseup', () => this.isFire = false);
         mouse.addListener('mouseleave', () => this.isFire = false);
 
-        const weapon = new Weapon({ name: 'aboba', model: MODELS.weapon, layer: this.layer + 0.05 });
+        const weapon = new Weapon({ name: 'playerGun', model: MODELS.weapon, layer: this.layer + 0.05 });
         scene.spawn(weapon);
         this.weapon = weapon;
     }
 
-    update({ deltaTime, camera }) {
-        this.angle += this.angVel * deltaTime;
-        this.translate(vMath.prod(this.forward(), deltaTime * this.move));
-
-        this.weapon.position = this.position;
+    update({ camera }) {
         this.weapon.lookAt(camera.mousePosition);
         if (this.isFire)
             this.weapon.tryFire();
+    }
+
+    lateUpdate() {
+        this.position = this.ship.position;
+        this.weapon.position = this.ship.position;
     }
 }

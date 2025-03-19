@@ -40,7 +40,6 @@ const SCENES = {
         objects: [new Player({
             name: 'player',
             position: { x: 0, y: 0 },
-            model: MODELS.testShip,
             layer: 1
         })]
     }

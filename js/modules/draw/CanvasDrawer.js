@@ -61,9 +61,11 @@ class CanvasDrawer {
     polygon(points = [], color) {
         this.context.beginPath();
         this.context.fillStyle = color || DEFAULT_COLOR;
-        this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
-        for (let i = 1; i < points.length; i++) {
-            this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y))
+        if (points instanceof Array && points.length > 1) {
+            this.context.moveTo(this.xs(points[0].x), this.ys(points[0].y));
+            for (let i = 1; i < points.length; i++) {
+                this.context.lineTo(this.xs(points[i].x), this.ys(points[i].y))
+            }
         }
         this.context.fill()
         this.context.closePath();

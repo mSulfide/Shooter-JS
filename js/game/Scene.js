@@ -24,7 +24,22 @@ class Scene {
     }
 
     update(state) {
-        state.scene = {};
+        state.scene = {
+            spawn: gameObject => {
+                this.spawn(gameObject);
+                gameObject.start && gameObject.start(state);
+            }
+        };
         this.objects.forEach(gameObject => gameObject.update && gameObject.update(state));
+    }
+
+    lateUpdate(state) {
+        state.scene = {
+            spawn: gameObject => {
+                this.spawn(gameObject);
+                gameObject.start && gameObject.start(state);
+            }
+        };
+        this.objects.forEach(gameObject => gameObject.lateUpdate && gameObject.lateUpdate(state));
     }
 }

@@ -30,6 +30,7 @@ class Game {
 
             state.deltaTime = deltaTime / 1000;
             scene.update(state);
+            scene.lateUpdate(state);
     
             camera.render(scene);
 
