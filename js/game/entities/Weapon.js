@@ -16,11 +16,11 @@ class Weapon extends GameObject {
         this.delay = this.cooldown;
         const bullet = new Bullet({
             name: 'bullet',
-            position: vMath.add(vMath.prod(this.forward(), 0.2), this.position),
+            position: vMath.add(vMath.prod(this.forward(), 0.65), this.position),
             angle: this.angle,
             model: MODELS.bullet,
             layer: this.layer - 0.01,
-            speed: 10
+            radius: 0.1
         });
         this.scene.spawn(bullet);
     }
