@@ -10,5 +10,6 @@ class Bullet extends PhysicalBody {
     update() {
         if (vMath.sqrModul(this.position) >= DEATH_RADIUS ** 2)
             this.destroy();
+        this.angle = vMath.angle(this.velocity);
     }
 }
