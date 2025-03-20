@@ -19,6 +19,7 @@ class Weapon extends GameObject {
             position: vMath.add(vMath.prod(this.forward(), 0.7), this.position),
             model: MODELS.bullet,
             layer: this.layer - 0.01,
+            angle: this.angle,
             radius: 0.1,
             mass: 0.5
         });
