@@ -1,5 +1,6 @@
-class Ship extends GameObject {
+class Ship extends PhysicalBody {
     constructor(props) {
+        props.radius = 0.5;
         super(props);
         this.speed = props.speed || 3;
         this.acceleration = props.acceleration || 7;
@@ -13,7 +14,6 @@ class Ship extends GameObject {
 
     update({ deltaTime }) {
         this.velocity = vMath.lerp(this.velocity, vMath.prod(this.forward(), this.thrust * this.speed), this.acceleration * deltaTime);
-        this.translate(vMath.prod(this.velocity, deltaTime));
 
         const lerp = (a, b, step) => {
             const delta = Math.abs(a - b);

@@ -35,11 +35,12 @@ class VMath {
     norm(a) {
         const len = this.modul(a);
         if (len !== 0)
-            return {
-                x: a.x / len,
-                y: a.y / len
-            };
+            return this.prod(a, 1 / len);
         return this.zero();
+    }
+
+    distance(a, b) {
+        return vMath.modul(vMath.sub(b, a));
     }
 
     angle(a) {

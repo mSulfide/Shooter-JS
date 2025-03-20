@@ -4,6 +4,8 @@ class Game {
 
         const scene = new Scene(SCENES[START_SCENE_ID] || DEFAULT_SCENE);
 
+        const physic = new Physic(scene);
+
         this.keyboardInput = new KeyboardInput();
         this.mouseInput = new MouseInput(CANVAS_ID);
 
@@ -14,9 +16,9 @@ class Game {
 
         const state = {
             camera,
-            scene,
             keyboard: this.keyboardInput,
-            mouse: this.mouseInput
+            mouse: this.mouseInput,
+            physic
         }
 
         let timestamp = Date.now();
@@ -29,6 +31,7 @@ class Game {
             timestamp = currentTimestamp;
 
             state.deltaTime = deltaTime / 1000;
+            physic.update(state);
             scene.update(state);
             scene.lateUpdate(state);
     
