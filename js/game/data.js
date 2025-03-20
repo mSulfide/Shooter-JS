@@ -41,12 +41,6 @@ const SCENES = {
             name: 'player',
             position: { x: 0, y: 0 },
             layer: 1
-        }), new PhysicalBody({
-            name: 'test',
-            position: { x: 3, y: 0 },
-            mass: 10,
-            radius: 0.5,
-            model: MODELS.testShip
         })]
     }
 };
