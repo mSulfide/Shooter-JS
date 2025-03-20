@@ -4,6 +4,15 @@ class Scene {
         this.objects.forEach(gameObject => gameObject.destroy = () => this.delete(gameObject));
     }
 
+    addState(state) {
+        state.scene = {
+            spawn: gameObject => {
+                this.spawn(gameObject);
+                gameObject.start && gameObject.start(state);
+            }
+        };
+    }
+
     delete(gameObject) {
         delete this.objects.splice(this.objects.indexOf(gameObject), 1);
     }
@@ -14,32 +23,17 @@ class Scene {
     }
 
     start(state) {
-        state.scene = {
-            spawn: gameObject => {
-                this.spawn(gameObject);
-                gameObject.start && gameObject.start(state);
-            }
-        };
+        this.addState(state);
         this.objects.forEach(gameObject => gameObject.start && gameObject.start(state));
     }
 
     update(state) {
-        state.scene = {
-            spawn: gameObject => {
-                this.spawn(gameObject);
-                gameObject.start && gameObject.start(state);
-            }
-        };
+        this.addState(state);
         this.objects.forEach(gameObject => gameObject.update && gameObject.update(state));
     }
 
     lateUpdate(state) {
-        state.scene = {
-            spawn: gameObject => {
-                this.spawn(gameObject);
-                gameObject.start && gameObject.start(state);
-            }
-        };
+        this.addState(state);
         this.objects.forEach(gameObject => gameObject.lateUpdate && gameObject.lateUpdate(state));
     }
 }
