@@ -18,7 +18,7 @@ class Physic {
                 const inseption = Math.abs(a.radius + b.radius - vMath.distance(a.position, b.position))
                 if (inseption > 0.1)
                     a.qVelocity = vMath.prod(normal, inseption * b.mass / a.mass);
-                collisions.push({ collider: a, hitInfo: { normal, impulse, position } });
+                collisions.push({ collider: a, hitInfo: { collider: b, normal, impulse, position } });
             }
         }));
 
@@ -30,6 +30,7 @@ class Physic {
 
         const collisions = this.findAllCollisions(objects);
         collisions.forEach(({ collider, hitInfo }) => collider.collisionHandler(hitInfo));
+        collisions.forEach(({ collider, hitInfo }) => collider.onCollision && collider.onCollision(hitInfo));
 
         objects.forEach(object => object.fixedUpdate(state));
     }

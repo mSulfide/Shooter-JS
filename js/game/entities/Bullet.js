@@ -1,4 +1,4 @@
-const DEATH_RADIUS = 10;
+const DEATH_DELAY = 10;
 
 class Bullet extends PhysicalBody {
     constructor(props) {
@@ -7,9 +7,19 @@ class Bullet extends PhysicalBody {
         super(props);
     }
 
-    update() {
-        if (vMath.sqrModul(this.position) >= DEATH_RADIUS ** 2)
+    start() {
+        this.delay = DEATH_DELAY;
+    }
+
+    update({ deltaTime }) {
+        if (this.delay > 0)
+            this.delay -= deltaTime;
+        else
             this.destroy();
         this.angle = vMath.angle(this.velocity);
+    }
+
+    onCollision() {
+        this.destroy();
     }
 }

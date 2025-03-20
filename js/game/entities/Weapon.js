@@ -21,7 +21,7 @@ class Weapon extends GameObject {
             layer: this.layer - 0.01,
             angle: this.angle,
             radius: 0.1,
-            mass: 0.5
+            mass: 0.25
         });
         bullet.velocity = vMath.prod(this.forward(), 10);
         this.scene.spawn(bullet);

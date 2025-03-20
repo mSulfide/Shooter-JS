@@ -41,6 +41,11 @@ const SCENES = {
             name: 'player',
             position: { x: 0, y: 0 },
             layer: 1
+        }), new Ship({
+            name: 'ship',
+            model: MODELS.testShip,
+            layer: 1,
+            position: { x: 2, y: 1 }
         })]
     }
 };

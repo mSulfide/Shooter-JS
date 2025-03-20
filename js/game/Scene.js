@@ -11,6 +11,7 @@ class Scene {
                 gameObject.start && gameObject.start(state);
             }
         };
+        this.state = state;
     }
 
     delete(gameObject) {
@@ -19,6 +20,7 @@ class Scene {
     
     spawn(gameObject) {
         gameObject.destroy = () => this.delete(gameObject);
+        gameObject.start && gameObject.start(this.state);
         this.objects.push(gameObject);
     }
 
@@ -28,12 +30,10 @@ class Scene {
     }
 
     update(state) {
-        this.addState(state);
         this.objects.forEach(gameObject => gameObject.update && gameObject.update(state));
     }
 
     lateUpdate(state) {
-        this.addState(state);
         this.objects.forEach(gameObject => gameObject.lateUpdate && gameObject.lateUpdate(state));
     }
 }
