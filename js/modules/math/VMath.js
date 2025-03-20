@@ -60,7 +60,7 @@ class VMath {
     }
 
     lerp(a, b, step) {
-        const delta = this.sub(a, b);
+        const delta = this.sub(b, a);
         const offset = this.sqrModul(delta) > step * step ? this.prod(this.norm(delta), step) : delta;
         return this.add(a, offset);
     }
