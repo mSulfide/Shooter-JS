@@ -7,8 +7,11 @@ class Bullet extends PhysicalBody {
         super(props);
     }
 
-    start() {
+    start({ scene }) {
         this.delay = DEATH_DELAY;
+        this.onDestroy = () => {
+            scene.spawn(boom(this.position, (Math.random() * Math.PI * 2)));
+        }
     }
 
     update({ deltaTime }) {

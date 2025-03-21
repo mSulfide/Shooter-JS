@@ -21,7 +21,7 @@ class Game {
             keyboard: this.keyboardInput,
             mouse: this.mouseInput,
             animator: {
-                add: (animation, loop) => animator.add(animation, loop)
+                add: (animation, gameObject, loop) => animator.add(animation, gameObject, loop)
             },
             physic
         }

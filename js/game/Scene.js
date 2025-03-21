@@ -8,13 +8,13 @@ class Scene {
         state.scene = {
             spawn: gameObject => {
                 this.spawn(gameObject);
-                gameObject.start && gameObject.start(state);
             }
         };
         this.state = state;
     }
 
     delete(gameObject) {
+        gameObject.onDestroy && gameObject.onDestroy();
         delete this.objects.splice(this.objects.indexOf(gameObject), 1);
     }
     

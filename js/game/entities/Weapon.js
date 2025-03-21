@@ -23,6 +23,7 @@ class Weapon extends GameObject {
             radius: 0.1,
             mass: 0.25
         });
+        this.scene.spawn(boom(vMath.add(vMath.prod(this.forward(), 0.7), this.position)));
         bullet.velocity = vMath.prod(this.forward(), 10);
         this.scene.spawn(bullet);
     }

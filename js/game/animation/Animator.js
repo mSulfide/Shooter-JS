@@ -3,11 +3,12 @@ class Animator {
         this.clips = [];
     }
 
-    add(animation, loop = false) {
+    add(animation, setModel, loop = false) {
         const clip = {
             time: 0,
             animation,
             loop,
+            setModel,
             played: false
         };
         this.clips.push(clip);
@@ -28,8 +29,9 @@ class Animator {
     update({ deltaTime }) {
         this.clips.filter(({ played }) => played).forEach(clip => {
             clip.time += deltaTime;
-            clip.animation.setModel(clip.time);
+            clip.setModel(clip.animation.getModel(clip.time));
             if (clip.time > clip.animation.size()) {
+                clip.time = 0;
                 clip.callback && clip.callback();
                 if (!clip.loop)
                     clip.played = false;

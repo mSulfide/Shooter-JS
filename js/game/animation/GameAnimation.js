@@ -1,15 +1,10 @@
-class Animation {
-    constructor(frames, gameObject) {
+class GameAnimation {
+    constructor(frames) {
         this.frames = frames;
-        this.gameObject = gameObject;
     }
 
     size() {
         return this.frames.map(({ time }) => time).reduce((size, time) => size += time);
-    }
-
-    setModel(time) {
-        this.gameObject.model = this.getModel(time);
     }
 
     getModel(time) {
