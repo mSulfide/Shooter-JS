@@ -10,7 +10,8 @@ class PhysicalBody extends GameObject {
     collisionHandler({ normal, impulse }) {
         if (vMath.scal(normal, this.velocity) < 0)
             this.velocity = vMath.sub(this.velocity, vMath.prod(normal, vMath.scal(normal, this.velocity)));
-        this.velocity = vMath.add(this.velocity, vMath.prod(impulse, 1 / this.mass));
+        if (vMath.scal(normal, impulse) > 0)
+            this.velocity = vMath.add(this.velocity, vMath.prod(impulse, 1 / this.mass));
     }
 
     fixedUpdate({ deltaTime }) {

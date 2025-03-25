@@ -11,8 +11,8 @@ class Physic {
         const collisions = [];
         objects.forEach(a => objects.forEach(b => {
             if (a !== b && isCollision(a, b)) {
+                const position = vMath.add(a.position, vMath.prod(vMath.sub(a.position, b.position), 0.5));
                 const normal = vMath.norm(vMath.sub(a.position, b.position));
-                const position = vMath.add(vMath.prod(normal, b.radius), b.position);
                 const allImpulse = vMath.scal(a.velocity, vMath.prod(normal, -1)) * a.mass + vMath.scal(b.velocity, normal) * b.mass
                 const impulse = vMath.prod(normal, allImpulse / 2);
                 const inseption = Math.abs(a.radius + b.radius - vMath.distance(a.position, b.position))
