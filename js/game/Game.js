@@ -6,6 +6,8 @@ class Game {
 
         const physic = new Physic(scene);
 
+        const animator = new Animator();
+
         this.keyboardInput = new KeyboardInput();
         this.mouseInput = new MouseInput(CANVAS_ID);
 
@@ -18,6 +20,9 @@ class Game {
             camera,
             keyboard: this.keyboardInput,
             mouse: this.mouseInput,
+            animator: {
+                add: (animation, gameObject, loop) => animator.add(animation, gameObject, loop)
+            },
             physic
         }
 
@@ -34,6 +39,7 @@ class Game {
             physic.update(state);
             scene.update(state);
             scene.lateUpdate(state);
+            animator.update(state);
     
             camera.render(scene);
 

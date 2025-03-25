@@ -33,7 +33,7 @@ class Player extends GameObject {
         ];
         keyboard.bind(...bindings);
 
-        const weapon = new Weapon({ name: 'playerGun', model: MODELS.weapon, layer: this.layer + 0.05 });
+        const weapon = new Weapon({ name: 'playerGun', layer: this.layer + 0.05 });
         scene.spawn(weapon);
         this.weapon = weapon;
         mouse.addListener('mousedown', () => weapon.isFire = true);
