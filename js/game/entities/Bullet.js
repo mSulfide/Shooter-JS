@@ -26,6 +26,6 @@ class Bullet extends PhysicalBody {
     }
 
     onCollision() {
-        this.destroy();
+        //this.destroy();
     }
 }
