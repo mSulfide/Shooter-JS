@@ -3,8 +3,13 @@ class Player extends GameObject {
         super(props);
     }
 
-    start({ keyboard, mouse, scene }) {
-        const ship = new Ship({ name: 'playerShip', model: MODELS.testShip, layer: this.layer});
+    start({ keyboard, mouse, scene, camera }) {
+        const ship = new Ship({
+            name: 'playerShip',
+            model: MODELS.testShip,
+            layer: this.layer,
+            weapon: new Weapon({ name: 'playerGun', layer: this.layer + 0.05 })
+        });
         scene.spawn(ship);
         this.ship = ship;
         let forward = false, back = false;
@@ -33,20 +38,14 @@ class Player extends GameObject {
         ];
         keyboard.bind(...bindings);
 
-        const weapon = new Weapon({ name: 'playerGun', layer: this.layer + 0.05 });
-        scene.spawn(weapon);
-        this.weapon = weapon;
+        const weapon = ship.weapon;
         mouse.addListener('mousedown', () => weapon.isFire = true);
         mouse.addListener('mouseup', () => weapon.isFire = false);
         mouse.addListener('mouseleave', () => weapon.isFire = false);
+        mouse.addListener('mousemove', () => weapon.lookAt(camera.mousePosition))
     }
 
-    update({ camera }) {
-        this.weapon.lookAt(camera.mousePosition);
-    }
-
-    lateUpdate() {
+    update() {
         this.position = this.ship.position;
-        this.weapon.position = this.ship.position;
     }
 }

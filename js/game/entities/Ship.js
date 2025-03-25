@@ -10,6 +10,14 @@ class Ship extends PhysicalBody {
         this.velocity = vMath.zero();
         this.rotation = 0;
         this.angVelocity = 0;
+        this.weapon = props.weapon;
+    }
+
+    start({ scene }) {
+        if (this.weapon) {
+            scene.spawn(this.weapon);
+            this.appendChild(this.weapon);
+        }
     }
 
     update({ deltaTime }) {
